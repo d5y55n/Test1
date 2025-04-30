@@ -17,10 +17,13 @@ public class ImgReduce
 		{
 			Scanner scan= new Scanner(System.in);
 			
-			System.out.println("크기를 줄일 파일명을 입력해주세요");
-			String input=scan.nextLine();
-			File inputIamge = new File(input); // 원본 이미지 파일 경로
 			
+			
+			while(true)
+			{
+				System.out.println("크기를 줄일 파일명을 입력해주세요");
+				String input=scan.nextLine();
+				File inputImage = new File(input); // 원본 이미지 파일 경로
 				
 				if(input.equals("C:/Dev/Work/java_workspace/ee.png"))
 				{
@@ -34,14 +37,20 @@ public class ImgReduce
 	
 					File outputImage = new File("C:/Dev/Work/java_workspace/"+name); // 썸네일 이미지 파일 경로
 					int a =Integer.parseInt(width), b=Integer.parseInt(height);
-					Thumbnails.of(inputIamge).size(a, b).toFile("C:/Dev/Work/java_workspace/"+name);
+					Thumbnails.of(inputImage).size(a, b).toFile("C:/Dev/Work/java_workspace/"+name);
 					
 					System.out.println("변환 완료");
+					break;
 				}
 				else System.out.println("재입력");
 				
-				if(input.equals(null))
-					System.out.println("종료"); return;
+		
+				
+				if(input.equals(""))
+					{System.out.println("종료"); break;}
+					
+			}
+
 			
 			
 			
