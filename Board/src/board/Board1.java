@@ -124,13 +124,12 @@ public class Board1
 				}
 				
 			}
-			System.out.println("회원 정보를 로드했습니다.");
 			reader.close();
 		}
 		catch(IOException e) 
 		{
 
-			System.getProperty("user.dir");
+			System.out.println(System.getProperty("user.dir"));
 			System.out.println("회원 정보 로드 실패");
 			
 			e.printStackTrace();
