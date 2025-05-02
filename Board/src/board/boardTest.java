@@ -7,6 +7,7 @@ public class boardTest
 	{
 		Board1 b= new Board1();
 		b.loadUser();
+		b.loadPost();
 		
 		b.home();
 		
