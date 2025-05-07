@@ -23,7 +23,6 @@ public class Board1
 	
 	void home()//홈화면
 	{
-		String a;
 		do 
 		{
 			//타이틀
@@ -62,7 +61,6 @@ public class Board1
 			
 			System.out.println("---키를 입력해주세요. (L,S,F,W,[1~n])---");
 			String input=scan.nextLine();
-			a=input;
 			
 			if(input.equals("L"))
 			{
@@ -86,37 +84,40 @@ public class Board1
 				scan.nextLine();
 				home();
 			}
-			
-			
-			
-			boolean isNumber = true;
-			int number = 0; // 초기화
-	
-			try {
-			    number = Integer.parseInt(input);
-			} catch (NumberFormatException e) {
-			    isNumber = false;
+			else
+			{
+				try 
+				{
+					int a=Integer.parseInt(input);
+					viewPost(a);
+				}
+				catch(IndexOutOfBoundsException e) 
+				{
+					System.out.println("오류");
+					System.out.println("[any key]홈으로 이동");
+					scan.nextLine();
+					home();
+				}
+				catch(NumberFormatException e) 
+				{
+					System.out.println("오류");
+					System.out.println("[any key]홈으로 이동");
+					scan.nextLine();
+					home();
+				}
 			}
-	
-			if (isNumber) {
-			    viewPost(number);
-			    System.out.println("[any key]홈으로 이동");
-				scan.nextLine();
-				home();
-			} else {
-			    System.out.println("입력하신 값은 숫자가 아닙니다.");
-			    home();
-			}
+			
+			
 			
 		}
-		while(!a.equals("Exit"));
+		while(true);
 			
 		
 	}
 	
 	void loginHome(String id)//로그인홈화면
 	{
-		String a;
+
 		do 
 		{
 			//타이틀
@@ -154,7 +155,6 @@ public class Board1
 			
 			System.out.println("---키를 입력해주세요. (L,D,F,W,[1~n])---");
 			String input=scan.nextLine();
-			a=input;
 			
 			if(input.equals("L")) //로그아웃
 			{
@@ -171,26 +171,10 @@ public class Board1
 			{
 				write();
 			}
-			
-			boolean isNumber = true;
-			int number = 0; // 초기화
 
-			try {
-			    number = Integer.parseInt(input);
-			} catch (NumberFormatException e) {
-			    isNumber = false;
-			}
-
-			if (isNumber) {
-			    viewPost(number);
-			    System.out.println("[any key]홈으로 이동");
-				scan.nextLine();
-			} else {
-			    System.out.println("입력하신 값은 숫자가 아닙니다.");
-			}
 			
-		}while(!a.equals("Lqq"));
-		a="1";
+		}while(true);
+			
 		
 	}
 	
@@ -491,12 +475,15 @@ public class Board1
 	
 	void viewPost(int number) //[1~n] 글 보기 
 	{
-		String[] pos = board.get(number);
+		String[] pos = board.get(number-1);
 		System.out.println(" ──────────────────────────────");
-		System.out.println("           자유게시판  ");
+		System.out.println("           자유게시판   ");
 		System.out.println(" ──────────────────────────────");
 		System.out.println("제목 : "+pos[0]);
 		System.out.println("내용 : "+pos[1]);
 		System.out.println(" ");
+		System.out.println("[any key]홈으로");
+		scan.nextLine();
+		home();
 	}
 }
