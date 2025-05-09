@@ -1,7 +1,6 @@
 package board;
 
-
-public class boardTest 
+public class Board1Test 
 {
 	public static void main(String[] args) 
 	{

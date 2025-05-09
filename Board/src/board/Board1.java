@@ -23,11 +23,12 @@ public class Board1
 	
 	void home()//홈화면
 	{
+		String non ="";
 		do 
 		{
 			//타이틀
 			System.out.println("────────────────────────────────────────────────────────────");
-			System.out.println("                     음 그래그래 어서오고                        ");
+			System.out.println("                     NAVER (네이버 맞음)                        ");
 			System.out.println("────────────────────────────────────────────────────────────");
 					
 			//로그인 상태창
@@ -40,11 +41,11 @@ public class Board1
 			System.out.print("──────────────");       System.out.println("  ──────────────────────────────");
 														int i=1;
 			System.out.print("     Log in   │");    for(String[] post : board) 
-													{
+													{		
 														if(i==1)
-														{System.out.println("  "+i+"."+post[0]);}												
-														else{System.out.println("                 "+i+"."+post[0]); 
-														}i++;
+															{System.out.println(" "+i+"."+post[0]);}
+														else{System.out.println("                "+i+"."+post[0]);}
+														i++;
 													}
 			
 			System.out.println("──────────────");
@@ -89,7 +90,7 @@ public class Board1
 				try 
 				{
 					int a=Integer.parseInt(input);
-					viewPost(a);
+					viewPost(a, non);
 				}
 				catch(IndexOutOfBoundsException e) 
 				{
@@ -122,7 +123,7 @@ public class Board1
 		{
 			//타이틀
 			System.out.println("────────────────────────────────────────────────────────────");
-			System.out.println("                     음 그래그래 어서오고                        ");
+			System.out.println("                     NAVER(네이버 맞음)                        ");
 			System.out.println("────────────────────────────────────────────────────────────");
 					
 			//로그인 상태창
@@ -133,16 +134,15 @@ public class Board1
 			
 			//로그인
 			System.out.print("──────────────");   System.out.println("  ──────────────────────────────");
-													int i=1;
-			System.out.print("   Log out    │"); for(String[] post : board) 
-														{	
-															if(i==1)
-															{System.out.println("  "+i+"."+post[0]);}
-															else{System.out.println("                 "+i+"."+post[0]); 
-															}i++;
-														}
-			System.out.println("──────────────");
-			
+													
+			System.out.print("   Log out    │"); int i=1; 
+												for(String[] post : board) 
+												{		
+													if(i==1)
+														{System.out.println(" "+i+"."+post[0]);}
+													else{System.out.println("                "+i+"."+post[0]);}
+													i++;
+												}
 			//회원가입
 			System.out.println("──────────────");
 			System.out.println("    Del id    │");
@@ -162,14 +162,36 @@ public class Board1
 				break;
 			}
 			
-			if(input.equals("D")) 
+			else if(input.equals("D")) 
 			{
 				deleteID(id);
 			}
 			
-			if(input.equals("W")) 
+			else if(input.equals("W")) 
 			{
 				write();
+			}
+			else
+			{
+				try 
+				{
+					int a=Integer.parseInt(input);
+					viewPost(a, id);
+				}
+				catch(IndexOutOfBoundsException e) 
+				{
+					System.out.println("오류");
+					System.out.println("[any key]홈으로 이동");
+					scan.nextLine();
+					loginHome(id);
+				}
+				catch(NumberFormatException e) 
+				{
+					System.out.println("오류");
+					System.out.println("[any key]홈으로 이동");
+					scan.nextLine();
+					loginHome(id);
+				}
 			}
 
 			
@@ -449,6 +471,7 @@ public class Board1
 	
 	void loadPost() //Data 글 로드
 	{
+		board.clear();
 		try (BufferedReader reader= new BufferedReader(new FileReader(WRITE_DATA_FILE)))
 		{
 			String line;
@@ -473,7 +496,7 @@ public class Board1
 	}
 	
 	
-	void viewPost(int number) //[1~n] 글 보기 
+	void viewPost(int number, String id) //[1~n] 글 보기 
 	{
 		String[] pos = board.get(number-1);
 		System.out.println(" ──────────────────────────────");
@@ -484,6 +507,13 @@ public class Board1
 		System.out.println(" ");
 		System.out.println("[any key]홈으로");
 		scan.nextLine();
-		home();
+		if(id!=null)
+		{
+			loginHome(id);
+		}
+		else 
+		{
+			home();
+		}
 	}
 }
